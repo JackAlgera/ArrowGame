@@ -5,6 +5,7 @@ using UnityEngine;
 public class ArrowController : MonoBehaviour {
 
     public float speed;
+    public Direction direc;
     private Animator anim;
 
 	void Start () {
@@ -18,7 +19,7 @@ public class ArrowController : MonoBehaviour {
 
     public void Move()
     {
-        transform.Translate(-speed * Time.deltaTime, 0f, 0f);
+        transform.Translate(0f, -speed * Time.deltaTime, 0f);
     }
 
     public void Destroy()
@@ -36,7 +37,7 @@ public class ArrowController : MonoBehaviour {
     {
         if(collision.tag == "ArrowCollector")
         {
-            OnClickDestroy();
+            GameController.instance.EndGame();
         }
     }
 }
