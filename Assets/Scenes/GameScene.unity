@@ -222,8 +222,9 @@ MonoBehaviour:
   currentTimeBTWSpanChanges: 0
   arrowPrefab: {fileID: 1386009431876068, guid: b745a1086b13bd64ca0179def3b3a236,
     type: 2}
-  arrowSpeed: 3
-  arrowSpeedIncrease: 0.1
+  arrowSpeed: 2
+  mawArrowSpeed: 6
+  arrowSpeedIncrease: 0.02
   arrowsInGame: {fileID: 2071144532}
   arrowsToDestroy: {fileID: 1648211923}
   score: 0

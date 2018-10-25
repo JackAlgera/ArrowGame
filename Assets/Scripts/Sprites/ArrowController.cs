@@ -37,7 +37,7 @@ public class ArrowController : MonoBehaviour {
     {
         if(collision.tag == "ArrowCollector")
         {
-            GameController.instance.EndGame();
+            //GameController.instance.EndGame();
         }
     }
 }

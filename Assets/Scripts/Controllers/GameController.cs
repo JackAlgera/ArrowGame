@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour {
 
     public GameObject arrowPrefab;
     public float arrowSpeed;
+    public float mawArrowSpeed;
     public float arrowSpeedIncrease;
 
     public GameObject arrowsInGame;
@@ -33,7 +34,6 @@ public class GameController : MonoBehaviour {
 
     public SpawnMethods currentSpawnMethod;
 
-    // Random spawn
     // Left to Right spawn
     private bool spawnLeft = true;
     private int spawnLocationId = 0;
@@ -51,16 +51,16 @@ public class GameController : MonoBehaviour {
             instance = this;
         }
 
-        UpdateScore(false);
-        currentSpawnMethod = SpawnMethods.Random;
-        timeBTWSpawns = arrowSpeed * 5f;
-
         spawnPositions = new Vector3[initPos.transform.childCount];
 
         for (int i = 0; i < spawnPositions.Length; i++)
         {
             spawnPositions[i] = initPos.transform.GetChild(i).transform.position;
         }
+
+        UpdateScore(false);
+        ChangeSpawnSettings();
+        timeBTWSpawns = arrowSpeed * 5f;
 
         if(Random.Range(0,2) == 1)
         {
@@ -138,10 +138,12 @@ public class GameController : MonoBehaviour {
                 if (spawnLeft)
                 {
                     spawnLocationId = 0;
+                    spawnDirectionOfTravel = 1;
                 }
                 else
                 {
                     spawnLocationId = spawnPositions.Length - 1;
+                    spawnDirectionOfTravel = -1;
                 }
                 break;
 
@@ -320,8 +322,11 @@ public class GameController : MonoBehaviour {
 
     public void IncreaseSpeed()
     {
-        arrowSpeed += arrowSpeedIncrease * Time.deltaTime;
-        timeBTWSpawns = 1.5f / arrowSpeed;
+        if(arrowSpeed < mawArrowSpeed)
+        {
+            arrowSpeed += arrowSpeedIncrease * Time.deltaTime;
+            timeBTWSpawns = 1.5f / arrowSpeed;
+        }
     }
 
     public void UpdateScore(bool increaseScore)
