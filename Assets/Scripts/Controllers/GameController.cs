@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour {
     public float timeBTWSpawnChanges = 5f;
     public float currentTimeBTWSpanChanges = 0;
 
-    public GameObject arrowPrefab;
+    public GameObject[] arrowPrefab;
     public float arrowSpeed;
     public float mawArrowSpeed;
     public float arrowSpeedIncrease;
@@ -151,7 +151,7 @@ public class GameController : MonoBehaviour {
                 timeBTWSpawnChanges = 10f;
                 nbrOfArrowsInPack = Random.Range(2, 6);
                 nbrOfArrowsSpawned = 0;
-                direcOfArrow = (Direction)Random.Range(-1, sizeof(Direction) - 1);
+                direcOfArrow = (Direction)Random.Range(0, sizeof(Direction) - 1);
                 spawnLocationId = Random.Range(0, spawnPositions.Length);
                 break;
 
@@ -227,7 +227,7 @@ public class GameController : MonoBehaviour {
             if (nbrOfArrowsSpawned >= nbrOfArrowsInPack)
             {
                 nbrOfArrowsSpawned = 0;
-                direcOfArrow = (Direction)Random.Range(-1, sizeof(Direction) - 1);
+                direcOfArrow = (Direction)Random.Range(0, sizeof(Direction) - 1);
 
                 int newSpawnLocationId= Random.Range(0, spawnPositions.Length);
                 while (newSpawnLocationId == spawnLocationId)
@@ -334,6 +334,10 @@ public class GameController : MonoBehaviour {
         if(increaseScore)
         {
             score++;
+            if (((int)score % 10) == 0)
+            {
+                scoreText.GetComponent<ScoreShaker>().Shake();
+            }
         }
         scoreText.text = "" + score;
     }
@@ -348,7 +352,7 @@ public class GameController : MonoBehaviour {
 
     public void SpawnArrow(Vector3 spawnPos, Direction direc)
     {
-        GameObject currentArrow = Instantiate(arrowPrefab, spawnPos, Quaternion.identity);
+        GameObject currentArrow = Instantiate(arrowPrefab[(int)direc], spawnPos, Quaternion.identity);
         currentArrow.transform.parent = arrowsInGame.transform;
         currentArrow.GetComponent<ArrowController>().direc = direc;
         currentArrow.GetComponent<ArrowController>().speed = arrowSpeed;
@@ -382,6 +386,10 @@ public class GameController : MonoBehaviour {
             {
                 UpdateScore(true);
                 DestroyArrow();
+            }
+            else
+            {
+                EndGame();
             }
         }
     }

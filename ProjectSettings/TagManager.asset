@@ -46,6 +46,9 @@ TagManager:
   - name: Background
     uniqueID: 2947669853
     locked: 0
+  - name: Effect
+    uniqueID: 1907707271
+    locked: 0
   - name: Arrow
     uniqueID: 3947087811
     locked: 0

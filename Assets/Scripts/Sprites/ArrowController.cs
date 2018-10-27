@@ -8,7 +8,13 @@ public class ArrowController : MonoBehaviour {
     public Direction direc;
     private Animator anim;
 
+    public GameObject partSys;
+    public GameObject trailEffect;
+    public GameObject currentTrail;
+
 	void Start () {
+        //currentTrail = Instantiate(trailEffect, transform.position, Quaternion.identity);
+        //currentTrail.transform.parent = transform;
         anim = gameObject.GetComponent<Animator>();
 	}
 	
@@ -30,6 +36,10 @@ public class ArrowController : MonoBehaviour {
     public void OnClickDestroy()
     {
         speed = 0;
+        GameObject effect = Instantiate(partSys, transform.position, Quaternion.identity);
+        //currentTrail.transform.parent = transform.parent.parent;
+        var main = effect.GetComponent<ParticleSystem>().main;
+        main.startColor = transform.GetChild(0).GetComponent<SpriteRenderer>().color ;
         anim.SetTrigger("Destroy");
     }
 
@@ -37,7 +47,7 @@ public class ArrowController : MonoBehaviour {
     {
         if(collision.tag == "ArrowCollector")
         {
-            //GameController.instance.EndGame();
+            GameController.instance.EndGame();
         }
     }
 }
