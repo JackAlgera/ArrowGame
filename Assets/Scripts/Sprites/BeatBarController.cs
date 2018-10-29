@@ -19,7 +19,6 @@ public class BeatBarController : MonoBehaviour {
     private float lerpValue;
 
 	void Awake () {
-        Debug.Log("" + transform.localScale.y);
         initScaleY = transform.localScale.y;
         oldScaleY = initScaleY;
 

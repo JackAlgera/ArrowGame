@@ -149,7 +149,7 @@ public class GameController : MonoBehaviour {
 
             case SpawnMethods.Packs:
                 timeBTWSpawnChanges = 10f;
-                nbrOfArrowsInPack = Random.Range(2, 6);
+                nbrOfArrowsInPack = Random.Range(2, 5);
                 nbrOfArrowsSpawned = 0;
                 direcOfArrow = (Direction)Random.Range(0, sizeof(Direction) - 1);
                 spawnLocationId = Random.Range(0, spawnPositions.Length);
@@ -227,7 +227,13 @@ public class GameController : MonoBehaviour {
             if (nbrOfArrowsSpawned >= nbrOfArrowsInPack)
             {
                 nbrOfArrowsSpawned = 0;
-                direcOfArrow = (Direction)Random.Range(0, sizeof(Direction) - 1);
+
+                Direction newDirec = (Direction)Random.Range(0, sizeof(Direction) - 1);
+                while(newDirec == direcOfArrow)
+                {
+                    newDirec = (Direction)Random.Range(0, sizeof(Direction) - 1);
+                }
+                direcOfArrow = newDirec;
 
                 int newSpawnLocationId= Random.Range(0, spawnPositions.Length);
                 while (newSpawnLocationId == spawnLocationId)
@@ -397,7 +403,7 @@ public class GameController : MonoBehaviour {
     public void DestroyArrow()
     {
         arrowsInGame.transform.GetChild(0).GetComponent<ArrowController>().OnClickDestroy();
-        arrowsInGame.transform.GetChild(0).SetParent(arrowsToDestroy.transform);
+        arrowsInGame.transform.GetChild(0).parent = arrowsToDestroy.transform;
     }
 
     public void EndGame()
@@ -417,8 +423,39 @@ public class GameController : MonoBehaviour {
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+        UpdateHighScore();
+        score = 0;
+        spawnRate = 1;
+        UpdateScore(false);
+        ChangeSpawnSettings();
+        currentTimeBTWSpawns = 0;
+        timeBTWSpawns = arrowSpeed * 5f;
+
+        currentTimeBTWSpanChanges = 0;
+        spawnLeft = true;
+        spawnLocationId = 0;
+        spawnDirectionOfTravel = 1;
+        nbrOfArrowsInPack = 2;
+        nbrOfArrowsSpawned = 0;
+        direcOfArrow = Direction.Left;
+        if (Random.Range(0, 2) == 1)
+        {
+            leftAndRight = false;
+        }
+        else
+        {
+            leftAndRight = true;
+        }
+
+        while(arrowsInGame.transform.childCount != 0)
+        {
+            Transform arrow = arrowsInGame.transform.GetChild(0);
+            arrow.parent = arrowsToDestroy.transform;
+            arrow.GetComponent<ArrowController>().OnClickDestroy();
+        }
+
+        canSpawnArrows = true;
+}
 
     public void Quit()
     {
