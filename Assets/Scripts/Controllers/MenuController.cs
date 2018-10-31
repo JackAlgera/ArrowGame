@@ -8,6 +8,9 @@ public class MenuController : MonoBehaviour {
 
     public static MenuController instance;
 
+    public AudioClip musicClip1;
+    public AudioSource musicSource;
+
     public Text highScoreText;
 
     private void Awake()
@@ -16,6 +19,9 @@ public class MenuController : MonoBehaviour {
         {
             instance = this;
         }
+
+        musicSource.clip = musicClip1;
+        musicSource.Play();
 
         InitialiseGame(false);
         UpdateText();
@@ -48,5 +54,10 @@ public class MenuController : MonoBehaviour {
     public void UpdateText()
     {
         highScoreText.text = "" + GetHighScore();
+    }
+
+    public void StopSound()
+    {
+        musicSource.mute = !musicSource.mute;
     }
 }

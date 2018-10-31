@@ -10,6 +10,9 @@ public class GameController : MonoBehaviour {
 
     public static GameController instance;
 
+    public AudioClip musicClip1;
+    public AudioSource musicSource;
+
     public Vector3[] spawnPositions;
     public GameObject initPos;
     private bool canSpawnArrows = true;
@@ -50,6 +53,9 @@ public class GameController : MonoBehaviour {
         {
             instance = this;
         }
+
+        musicSource.clip = musicClip1;
+        musicSource.Play();
 
         spawnPositions = new Vector3[initPos.transform.childCount];
 
@@ -461,5 +467,10 @@ public class GameController : MonoBehaviour {
     {
         UpdateHighScore();
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void StopSound()
+    {
+        musicSource.mute = !musicSource.mute;
     }
 }
