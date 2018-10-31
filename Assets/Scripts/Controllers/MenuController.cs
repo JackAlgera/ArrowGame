@@ -20,6 +20,8 @@ public class MenuController : MonoBehaviour {
             instance = this;
         }
 
+        PlayerPrefs.SetInt("AdsPlayed", 0);
+
         musicSource.clip = musicClip1;
         musicSource.Play();
 

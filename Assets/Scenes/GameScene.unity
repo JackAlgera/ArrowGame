@@ -348,9 +348,9 @@ MonoBehaviour:
   - {fileID: 1264108128844616, guid: 83f85ae89a31d3e4aa4b096dddbc543e, type: 2}
   - {fileID: 1071417909365542, guid: 0564e5d4c3f38d047bf0b03e136b853a, type: 2}
   - {fileID: 1797005633191118, guid: cd506af5a3681a74baf030b7aac8cb77, type: 2}
-  arrowSpeed: 3
+  arrowSpeed: 1.5
   mawArrowSpeed: 6
-  arrowSpeedIncrease: 0.05
+  arrowSpeedIncrease: 0.04
   arrowsInGame: {fileID: 2071144532}
   arrowsToDestroy: {fileID: 1648211923}
   score: 0

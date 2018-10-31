@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Advertisements;
 
 public enum SpawnMethods { Random, Burst, LeftToRight, Packs, TwoDirections, DirectionDepLocation}
 
@@ -429,6 +430,16 @@ public class GameController : MonoBehaviour {
 
     public void RestartGame()
     {
+        if(PlayerPrefs.GetInt("AdsPlayed") >= 3)
+        {
+            StartCoroutine("ShowAdWhenReady");
+            PlayerPrefs.SetInt("AdsPlayed", 0);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("AdsPlayed", PlayerPrefs.GetInt("AdsPlayed") + 1);
+        }
+
         UpdateHighScore();
         score = 0;
         spawnRate = 1;
@@ -472,5 +483,13 @@ public class GameController : MonoBehaviour {
     public void StopSound()
     {
         musicSource.mute = !musicSource.mute;
+    }
+
+    IEnumerator ShowAdWhenReady()
+    {
+        while (!Advertisement.IsReady())
+            yield return null;
+
+        Advertisement.Show();
     }
 }
