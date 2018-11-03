@@ -593,7 +593,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000015258789, y: 1.6000061}
+  m_AnchoredPosition: {x: -0.000015258789, y: 1.5999756}
   m_SizeDelta: {x: 0, y: -533.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1106388788
@@ -827,7 +827,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15626e6b30901ef4899e578892d07c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicClip1: {fileID: 8300000, guid: 4d6d8bb057481f44dbca27b60ad8de9f, type: 3}
+  musicClip:
+  - {fileID: 8300000, guid: 44e42f4c7d9f1d248ac73588138b2b78, type: 3}
+  - {fileID: 8300000, guid: 4d6d8bb057481f44dbca27b60ad8de9f, type: 3}
+  - {fileID: 8300000, guid: 25d897f37b48cae46bcd1d1f592d5c71, type: 3}
+  - {fileID: 8300000, guid: 2c83f12615bca6b4fbaa43f043ee8a66, type: 3}
+  - {fileID: 8300000, guid: c7e7e3b5b7d63e247821183c2709c5b0, type: 3}
   musicSource: {fileID: 1292418752}
   highScoreText: {fileID: 1166836588}
 --- !u!4 &1292418751
@@ -856,7 +861,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

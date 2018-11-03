@@ -11,8 +11,9 @@ public class GameController : MonoBehaviour {
 
     public static GameController instance;
 
-    public AudioClip musicClip1;
+    public AudioClip[] musicClip;
     public AudioSource musicSource;
+    private int currentMusicId;
 
     public Vector3[] spawnPositions;
     public GameObject initPos;
@@ -55,7 +56,9 @@ public class GameController : MonoBehaviour {
             instance = this;
         }
 
-        musicSource.clip = musicClip1;
+        currentMusicId = Random.Range(0, musicClip.Length);
+
+        musicSource.clip = musicClip[currentMusicId];
         musicSource.Play();
 
         spawnPositions = new Vector3[initPos.transform.childCount];
@@ -78,8 +81,23 @@ public class GameController : MonoBehaviour {
             leftAndRight = true;
         }
 	}
-	
-	void Update () {
+
+    private void FixedUpdate()
+    {
+        if (!musicSource.isPlaying)
+        {
+            int newMusicId = Random.Range(0, musicClip.Length);
+            while (currentMusicId == newMusicId)
+            {
+                newMusicId = Random.Range(0, musicClip.Length);
+            }
+            currentMusicId = newMusicId;
+            musicSource.clip = musicClip[currentMusicId];
+            musicSource.Play();
+        }
+    }
+
+    void Update () {
 
         switch (currentSpawnMethod)
         {
