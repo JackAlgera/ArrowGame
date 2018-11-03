@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BeatBarController : MonoBehaviour {
 
+    // Size controller
     public float initScaleY;
     public float initScaleRange;
 
@@ -17,6 +18,9 @@ public class BeatBarController : MonoBehaviour {
 
     public float speed;
     private float lerpValue;
+
+    // Color controller
+    
 
 	void Awake () {
         initScaleY = transform.localScale.y;

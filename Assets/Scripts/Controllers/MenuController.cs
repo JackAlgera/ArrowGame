@@ -45,6 +45,7 @@ public class MenuController : MonoBehaviour {
         {
             PlayerPrefs.SetInt("FirstLaunch", 1);
             PlayerPrefs.SetInt("HighScore", 0);
+            PlayerPrefs.SetInt("PlayMusic", 1);
         }
     }
 

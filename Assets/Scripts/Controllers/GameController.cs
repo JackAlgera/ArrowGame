@@ -446,6 +446,7 @@ public class GameController : MonoBehaviour {
         UpdateScore(false);
         ChangeSpawnSettings();
         currentTimeBTWSpawns = 0;
+        arrowSpeed = 2f;
         timeBTWSpawns = arrowSpeed * 5f;
 
         currentTimeBTWSpanChanges = 0;
@@ -472,7 +473,7 @@ public class GameController : MonoBehaviour {
         }
 
         canSpawnArrows = true;
-}
+    }
 
     public void Quit()
     {
